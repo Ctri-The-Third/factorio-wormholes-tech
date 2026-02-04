@@ -1,0 +1,10 @@
+{
+    "name": "wormholes-new-game-plus-Technologies",
+    "version": "0.0.1",
+    "title": "Wormholes: Technology reset",
+    "author":"C'tri",
+    "factorio_version": "2.0",
+    "dependencies" : ["space-age", "wormholes-new-game-plus"],
+    "space_travel_required": true
+
+}
