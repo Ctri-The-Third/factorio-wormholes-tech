@@ -1,0 +1,12 @@
+Version: 1.0.0
+Date: 20. 12. 2025
+  Major Features:
+    - Technologies are reset when entering wormhole
+    - Bonuses (e.g. productivity, damage) are kept
+  Modding: 
+    - added remote methods to persist specific technologies through reset.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+Date: 19. 02. 2026
+  Features:
+    - Initial commit to github with minimal working content
