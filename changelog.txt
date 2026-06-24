@@ -1,3 +1,22 @@
+Version: 1.1.0
+Date: 24. 06. 2026
+  Major Features:
+    - Added support for Factorio 2.1
+  Bugfixes:
+    - Fixed wormhole reset events not being picked up on new saves
+    - Base mod event IDs are now cached and refreshed on configuration changes, so
+      reset events keep firing after mod updates or load-order changes.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 09. 06. 2026
+  Minor Features:
+    - added support for Factorio 2.1
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 09. 06. 2026
+  Minor Features:
+    - Added missing thumbnail
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 20. 12. 2025
   Major Features:

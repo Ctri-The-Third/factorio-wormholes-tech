@@ -1,39 +1,29 @@
 require("controls.pre_wormhole")
 require("controls.post_wormhole")
 
-script.on_load(function()    
-    register_events()
-
-    
-end  ) 
-
-script.on_init(function()
-    register_events()
-
-    register_technology_to_persist("oil-processing")
-    register_technology_to_persist("wormhole-discovery")
-    
-end )
 
 
 
-function register_events()
-    if not remote.interfaces["wormholes-new-game-plus"] then
+local function fetch_event_ids()
+    if not remote.interfaces["wormholes-new-game-plus"] then 
         log("missing the `wormholes-new-game-plus` dependency")
+        storage.pre_wormhole_event_id = nil 
+        storage.post_wormhole_event_id = nil 
         return 
     end 
-
-    local pre_wormhole_event_v = remote.call("wormholes-new-game-plus", "get_pre_wormhole_event")
-    local post_wormhole_event_v = remote.call("wormholes-new-game-plus", "get_post_wormhole_event")
-
-    script.on_event(pre_wormhole_event_v, function(event )
-        pre_wormhole_event()
-    end )
-
-    script.on_event(post_wormhole_event_v, function(event)
-        post_wormhole_event()
-    end )
+    storage.pre_wormhole_event_id = remote.call("wormholes-new-game-plus", "get_pre_wormhole_event")
+    storage.post_wormhole_event_id = remote.call("wormholes-new-game-plus", "get_post_wormhole_event")
+    
 end 
+
+local function register_handlers()
+    if storage.pre_wormhole_event_id then 
+        script.on_event(storage.pre_wormhole_event_id, function(event) pre_wormhole_event() end)
+    end 
+    if storage.post_wormhole_event_id then 
+        script.on_event(storage.post_wormhole_event_id, function(event) post_wormhole_event() end)
+    end
+end  
 
 
 remote.add_interface("wormholes-new-game-plus-technologies", {
@@ -60,3 +50,21 @@ function register_technology_to_persist(tech_name, safe_bool)
         storage.safe_tech_names[tech_name] = false
     end 
 end 
+
+
+function init_events()
+        fetch_event_ids()
+        register_handlers()
+end 
+
+
+script.on_load(function()    
+    register_handlers()
+
+    
+end  ) 
+script.on_configuration_changed(function()
+    fetch_event_ids()
+    register_handlers()
+end )
+
